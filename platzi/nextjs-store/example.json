@@ -1,0 +1,85 @@
+{
+  "id": 8127607799958,
+  "title": "Automóvil Eléctrico de Núcleo Único",
+  "body_html": "<p>El futuro de la movilidad ha llegado con nuestro automóvil eléctrico de núcleo único. Rendimiento impresionante y cero emisiones.</p>",
+  "vendor": "Future World",
+  "product_type": "",
+  "created_at": "2024-05-21T11:48:33-07:00",
+  "handle": "automovil-electrico-de-nucleo-unico",
+  "updated_at": "2024-05-21T11:48:36-07:00",
+  "published_at": "2024-05-21T11:48:31-07:00",
+  "template_suffix": null,
+  "published_scope": "global",
+  "tags": "Movilidad Eléctrica y Vehículos Autónomos",
+  "status": "active",
+  "admin_graphql_api_id": "gid://shopify/Product/8127607799958",
+  "variants": [
+    {
+      "id": 43664499245206,
+      "product_id": 8127607799958,
+      "title": "Default Title",
+      "price": "36.18",
+      "sku": null,
+      "position": 1,
+      "inventory_policy": "deny",
+      "compare_at_price": "44.89",
+      "fulfillment_service": "manual",
+      "inventory_management": null,
+      "option1": "Default Title",
+      "option2": null,
+      "option3": null,
+      "created_at": "2024-05-21T11:48:33-07:00",
+      "updated_at": "2024-05-21T11:48:33-07:00",
+      "taxable": true,
+      "barcode": null,
+      "grams": 0,
+      "weight": 0,
+      "weight_unit": "kg",
+      "inventory_item_id": 45761609433238,
+      "inventory_quantity": 10,
+      "old_inventory_quantity": 10,
+      "requires_shipping": true,
+      "admin_graphql_api_id": "gid://shopify/ProductVariant/43664499245206",
+      "image_id": null
+    }
+  ],
+  "options": [
+    {
+      "id": 10311323353238,
+      "product_id": 8127607799958,
+      "name": "Title",
+      "position": 1,
+      "values": [
+        null
+      ]
+    }
+  ],
+  "images": [
+    {
+      "id": 36122328531094,
+      "alt": null,
+      "position": 1,
+      "product_id": 8127607799958,
+      "created_at": "2024-05-21T11:48:33-07:00",
+      "updated_at": "2024-05-21T11:48:33-07:00",
+      "admin_graphql_api_id": "gid://shopify/ProductImage/36122328531094",
+      "width": 1024,
+      "height": 1024,
+      "src": "https://cdn.shopify.com/s/files/1/0644/3840/3222/files/7CNYas7.jpg?v=1716317313",
+      "variant_ids": []
+    }
+  ],
+  "image": {
+    "id": 36122328531094,
+    "alt": null,
+    "position": 1,
+    "product_id": 8127607799958,
+    "created_at": "2024-05-21T11:48:33-07:00",
+    "updated_at": "2024-05-21T11:48:33-07:00",
+    "admin_graphql_api_id": "gid://shopify/ProductImage/36122328531094",
+    "width": 1024,
+    "height": 1024,
+    "src": "https://cdn.shopify.com/s/files/1/0644/3840/3222/files/7CNYas7.jpg?v=1716317313",
+    "variant_ids": []
+  }
+}

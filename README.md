@@ -1,2 +1,3 @@
 # nextjs-courses
-a bunch of nextjs courses
+a bunch of nextjs projects
+
