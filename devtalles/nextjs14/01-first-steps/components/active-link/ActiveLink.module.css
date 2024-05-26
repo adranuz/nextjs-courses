@@ -1,0 +1,8 @@
+/* @apply is a directive that allows you to apply a set of utility classes to a selector. */
+
+.link {
+  @apply hover:underline hover:text-blue-400 mr-2 transition-all
+}
+.activelink {
+  @apply text-blue-500
+}
