@@ -1,18 +1,24 @@
-import { PokemonResponse } from "@/pokemons";
+import { PokemonResponse, PokemonsResponse } from "@/pokemons";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
 interface Props {
-	searchParams?: any;
-	params: { id: string };
+	params: { name: string };
 }
 
 // funcion para generar las 151 rutas de los pokemons
 // esto solo se va a ejecutar en build time
 export async function generateStaticParams() {
-  const static151Pokemons = Array.from({ length: 151 }, (_, i) => i + 1);
-  return static151Pokemons.map((id) => ({ id: id.toString() }));
+  // return array with 151 pokemon names
+  const data:PokemonsResponse = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151")
+  .then((data) => data.json())
+  return data.results.map((pokemon: any) => ({ name: pokemon.name }));
+
+  // return array with 151 pokemon ids
+  // const static151Pokemons = Array.from({ length: 151 }, (_, i) => i + 1);
+  // return static151Pokemons.map((id) => ({ id: id.toString() }));
+
   // return [
   //   { id: "1" },
   //   { id: "2" },
@@ -26,7 +32,7 @@ export async function generateStaticParams() {
 // metadata generada por el request
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	try {
-		const pokemon = await getPokemon(params.id);
+		const pokemon = await getPokemon(params.name);
 		return {
 			title: `Pokemon #${pokemon.id} - ${pokemon.name.toUpperCase()}`,
 			description: "Pokemon description",
@@ -40,10 +46,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 // si la request falla podemos llamar a notfound para mostrar una pagina 404
-const getPokemon = async (id: string): Promise<PokemonResponse> => {
+const getPokemon = async (name: string): Promise<PokemonResponse> => {
   try {
     
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`, {
       cache: "force-cache",
       // next: { revalidate: 60*60*30*6 }
     });
@@ -55,7 +61,7 @@ const getPokemon = async (id: string): Promise<PokemonResponse> => {
 };
 
 export default async function PokemonPage({ params }: Props) {
-	const pokemon = await getPokemon(params.id);
+	const pokemon = await getPokemon(params.name);
 
 	return (
 		<div className="relative flex flex-col items-center rounded-[20px] w-[700px] mx-auto bg-white bg-clip-border  shadow-lg  p-3">
