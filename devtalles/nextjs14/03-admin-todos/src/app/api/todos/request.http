@@ -1,0 +1,28 @@
+### peticion get
+GET http://localhost:3000/api/todos HTTP/1.1
+
+
+
+### peticion delete
+DELETE http://localhost:3000/api/todos HTTP/1.1
+
+
+### peticion post
+POST http://localhost:3000/api/todos HTTP/1.1
+
+{
+    "description": "Conquistar el mundo",
+    "completed": "true",
+    "other":    "otro"
+}
+
+### peticion put
+PUT http://localhost:3000/api/todos/5dc1210e-737d-49f5-b864-27ec329c4d79 HTTP/1.1
+
+{
+    "completed": "1"
+}
+
+### peticion get id
+GET http://localhost:3000/api/todos/5dc1210e-737d-49f5-b864-27ec329c4d79 HTTP/1.1
+

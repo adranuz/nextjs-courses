@@ -1,10 +1,30 @@
 'use client'
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { addOne, initCounterState, resetCounter, subtractOne } from "@/store/counter/counterSlice";
+import { useEffect, useState } from "react";
 
-export const CarCounter = ({value = 0}: {value?: number}) => {
-  const [count, setCount] = useState(value)
-  const incremet = () => setCount(count + 1)
-  const decremet = () => setCount(count - 1)
+export interface CounterResponse {
+	method: string;
+	count: number;
+}
+
+const getApiCounter = async () => {
+	const data = await fetch('/api/counter').then(res => res.json());
+	return data as CounterResponse;
+};
+
+
+export const CarCounter = ({value}: {value: number}) => {
+	const count = useAppSelector((state) => state.counterReducer.count);
+	const dispatch = useAppDispatch();
+
+
+
+
+		useEffect(() => {
+			getApiCounter().then((data) => dispatch(initCounterState(data.count)) )
+			
+		}, [dispatch, value]);
 
   return (
 		<>
@@ -12,13 +32,13 @@ export const CarCounter = ({value = 0}: {value?: number}) => {
 
 			<div className="flex">
 				<button
-					onClick={incremet}
+					onClick={() => dispatch(addOne())}
 					className="flex items-center justify-center p-2 rounded-xl bg-gray-900 text-white hover:bg-gray-600 transition-all w-[100px] mr-2"
 				>
 					+1
 				</button>
 				<button
-					onClick={decremet}
+					onClick={() => dispatch(subtractOne())}
 					className="flex items-center justify-center p-2 rounded-xl bg-gray-900 text-white hover:bg-gray-600 transition-all w-[100px] mr-2"
 				>
 					-1

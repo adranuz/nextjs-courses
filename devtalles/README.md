@@ -23,3 +23,12 @@
 - [Pokeapi](https://pokeapi.co/)
 - [Error NEXTjs](https://nextjs.org/docs/app/building-your-application/routing/error-handling)
 - [Not Found Nextjs](https://nextjs.org/docs/app/api-reference/file-conventions/not-found)
+
+
+## Route Handlers
+[Route Handlers](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+
+
+## Prisma
+- [Prisma](https://www.prisma.io/docs/getting-started/quickstart)
+- [Prisma Nextjs](https://vercel.com/guides/nextjs-prisma-postgres)
