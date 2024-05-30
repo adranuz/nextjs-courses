@@ -1,5 +1,4 @@
 import { WidgetItem } from "@/components/WidgetItem";
-import Image from "next/image";
 
 export default function Home() {
   return (

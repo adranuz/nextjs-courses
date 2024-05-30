@@ -21,5 +21,4 @@ model Employee {
   isAdmin   Boolean  @default(false)
   createdAt DateTime @default(now()) @db.Timestamp(6)
   roles     String[] @default([])
-
 }

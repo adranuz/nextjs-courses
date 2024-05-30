@@ -2,6 +2,8 @@ import prisma from '@/lib/prisma'
 import { NextResponse, NextRequest } from 'next/server'
 import * as yup from 'yup'
 
+
+// funcion para listar todos
 export async function GET(request: Request) { 
   const { searchParams } = new URL(request.url)
 
@@ -29,6 +31,7 @@ const postSchema = yup.object({
   completed: yup.boolean().optional().default(false)
 })
 
+// funcion para crear un solo todo
 export async function POST(request: Request) {
   try {
     const body = await postSchema.validate(await request.json())
@@ -47,6 +50,8 @@ export async function POST(request: Request) {
   }
 }
 
+
+// funcion para eliminar todos los todos completados
 export async function DELETE(request: Request) {
   const completedTodos = await prisma.todo.findMany({
     where: { completed: true }
