@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@prisma/client": "^5.14.0",
+    "cookies-next": "^4.2.1",
     "next": "14.2.3",
     "npm-check-updates": "^16.14.20",
     "react": "^18",

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { CiBookmarkCheck, CiLogout, CiSquareCheck, CiViewList } from "react-icons/ci";
+import { CiBookmarkCheck, CiCoffeeBean, CiLogout, CiShoppingBasket, CiSquareCheck, CiViewList } from "react-icons/ci";
 import { SidebarItem } from "./SidebarItem";
 
 const sidebarItems = [
@@ -18,6 +18,16 @@ const sidebarItems = [
 		title: "Server Actions",
 		href: "/dashboard/server-actions",
 		icon: <CiViewList size={30} />,
+	},
+	{
+		title: "Cookies",
+		href: "/dashboard/cookies",
+		icon: <CiCoffeeBean size={30} />,
+	},
+	{
+		title: "Products cart",
+		href: "/dashboard/products",
+		icon: <CiShoppingBasket size={30} />,
 	},
 ];
 

@@ -1,3 +1,5 @@
+require("newrelic");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {};
 
