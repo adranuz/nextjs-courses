@@ -24,7 +24,7 @@ const getProducts = async () => {
 
 export const MainProduct = async () => {
 	const products: Product[] = await getProducts();
-	console.log(products[0]);
+	// console.log(products[0]);
 	return (
 		<section className="container">
 			<h3 className="text-3xl text-center font-bold my-8">✨ Main products released!</h3>

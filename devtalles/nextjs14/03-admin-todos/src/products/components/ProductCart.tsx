@@ -20,7 +20,7 @@ export const ProductCard = (props: Props) => {
   const getTotalCount = () => {
     const total = getCookieCart()
     const thisProductCount = total[props.id] ?? 0
-    router.refresh()
+    // router.refresh()
 
     return thisProductCount
   }
