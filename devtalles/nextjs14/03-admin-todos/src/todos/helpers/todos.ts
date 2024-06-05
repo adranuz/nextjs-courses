@@ -1,5 +1,6 @@
 // instrucciones para realizar el posteo http
 
+import { auth } from "@/auth";
 import { Todo } from "@prisma/client";
 
 // demora intencional
@@ -36,7 +37,7 @@ export const createTodo = async (description: string):Promise<Todo> => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify({...body})
   }).then(res => res.json())
   return response
 }

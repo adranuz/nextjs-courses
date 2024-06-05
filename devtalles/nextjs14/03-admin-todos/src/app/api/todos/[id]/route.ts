@@ -1,3 +1,4 @@
+import { auth } from '@/auth';
 import prisma from '@/lib/prisma'
 import { NextResponse, NextRequest } from 'next/server'
 import * as yup from 'yup';
@@ -16,9 +17,15 @@ interface Todo {
 }
 
 const getTodo = async (id: string): Promise<Todo | null> => {
+	const session = await auth()
+	if(!session?.user?.id)
+		throw NextResponse.json({message: 'User not found'}, {status: 400})
+	
+	
 	const todo = await prisma.todo.findUnique({
 		where: {
 			id,
+			userId: session.user.id
 		},
 	});
 	return todo

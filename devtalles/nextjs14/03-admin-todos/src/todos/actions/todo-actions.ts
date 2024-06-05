@@ -1,5 +1,6 @@
 'use server'
 
+import { auth } from "@/auth";
 import prisma from "@/lib/prisma"
 import { Todo } from '@prisma/client';
 import { revalidatePath } from "next/cache";
@@ -14,16 +15,23 @@ const sleep = (seconds: number = 0 ):Promise<boolean> => {
   })
 }
 
+const getUserIdFromSession = async () => {
+  const session = await auth();
+    if(!session?.user?.id) throw new Error('User not found')
+  return session.user.id
+}
+
 // SERVER ACTIONS
 export const toggleTodo = async (id: string, completed: boolean):Promise<Todo> => {
   // await sleep(3)
+  const userId = await getUserIdFromSession()
   const todo = await prisma.todo.findFirst({
-    where: { id },
+    where: { id, userId: userId },
   })
   if(!todo) throw new Error('Todo not found')
 
   const updatedTodo = await prisma.todo.update({
-    where: { id },
+    where: { id, userId: userId },
     data: { completed }
   })
   revalidatePath('/dashboard/server-actions')
@@ -34,11 +42,13 @@ export const toggleTodo = async (id: string, completed: boolean):Promise<Todo> =
 /// toggle complete del todo
 export const createTodo = async (description: string):Promise<Todo> => {
   try {
-    
+    const userId = await getUserIdFromSession()
     const body = {description}
-    
     const todo = await prisma.todo.create({
-      data: body
+      data: {
+        ...body,
+        userId
+      }
     })
     revalidatePath('/dashboard/server-actions')
     return todo
@@ -48,8 +58,10 @@ export const createTodo = async (description: string):Promise<Todo> => {
 }
 
 export const deleteCompleted = async ():Promise<boolean> => {
+  const userId = await getUserIdFromSession()
+
   const response = await prisma.todo.deleteMany({
-    where: { completed: true }
+    where: { completed: true, userId }
   })
   revalidatePath('/dashboard/server-actions')
   return true
