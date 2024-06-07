@@ -5,13 +5,14 @@ export interface Product {
   images: string[];
   inStock: number;
   price: number;
-  sizes: ValidSizes[];
+  sizes: ProductSize[];
   slug: string;
   tags: string[];
   title: string;
-  type: ValidTypes;
-  gender: 'men'|'women'|'kid'|'unisex'
+  type: ProductType;
+  gender: ProductGender;
 }
 
-export type ValidSizes = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
-export type ValidTypes = 'shirts'|'pants'|'hoodies'|'hats';
+export type ProductGender = 'men'|'women'|'kid'|'unisex'
+export type ProductSize = 'XS'|'S'|'M'|'L'|'XL'|'XXL'|'XXXL';
+export type ProductType = 'shirts'|'pants'|'hoodies'|'hats';

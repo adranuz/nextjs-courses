@@ -6,10 +6,11 @@ export default function ShopLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<main className="bg-teal-500 flex min-h-screen flex-col px-5">
+		<main className="bg-teal-500 flex min-h-screen flex-col">
 			<TopMenu />
 			<Sidebar />
-			<div className="px-0 sm:px-10">
+			{/* <div className="px-0 max-w-[1024px] m-auto sm:px-10 "> */}
+			<div className="px-0 py-0 max-w-[1024px] m-auto">
 				{children}
 			</div>
 		</main>

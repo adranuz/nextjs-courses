@@ -13,7 +13,9 @@ Project based in the [Tesla Shop Apparel](https://shop.tesla.com/category/appare
 - Static Site Generation (SSG)
 - Client Side Rendering (CSR)
 - Tailwind CSS
+- [Swiper](https://swiperjs.com/)
 - Zustand
+- 
 
 ## How to run
 1. Clone this repository 
