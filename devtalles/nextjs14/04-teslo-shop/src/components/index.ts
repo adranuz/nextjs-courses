@@ -10,3 +10,4 @@ export * from './product/size-selector/SizeSelector';
 export * from './product/quantity-selector/QuantitySelector';
 export * from './product/slide-show/SliceShow';
 export * from './product/slide-show/SliceShowMobile';
+export * from './product/stock-label/StockLabel';
