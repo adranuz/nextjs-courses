@@ -1,26 +1,23 @@
 export const revalidate = 604800; // revalidate cada 7 dias
 
 import {
-	SizeSelector,
-	Title,
 	SliceShow,
-	QuantitySelector,
 	SliceShowMobile,
 	StockLabel,
 } from "@/components";
 import { notFound } from "next/navigation";
 import { getProduct } from "@/actions";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata,  } from "next";
+import { AddToCart } from "./ui/AddToCart";
 
 interface Props {
 	params: {
 		slug: string;
-	};
+	},
 }
 
 export async function generateMetadata(
-	{ params }: Props,
-	parent: ResolvingMetadata
+	{ params }: Props
 ): Promise<Metadata> {
 	// read route params
 	const id = params.slug;
@@ -73,18 +70,7 @@ export default async function ProductPage({ params }: Props) {
 				{/* Stock */}
 				<StockLabel slug={product.slug} />
 
-				{/* Titulo */}
-				<Title title={product.title} className="text-xl -my-4" />
-				<p className="text-llg">${product.price}</p>
-
-				{/* Selector de tallas */}
-				<SizeSelector sizes={product.sizes} selectedSize={product.sizes[0]} />
-				{/* Selector de cantidad */}
-				<QuantitySelector quantity={product.inStock} />
-
-				{/* Button */}
-				<button className="btn-primary my-5">Agregar al carrito</button>
-
+        <AddToCart product={product}/>
 				{/* Descripcion */}
 				<h3 className="font-bold text-sm">Descripción</h3>
 				<p className="font-light">{product.description}</p>

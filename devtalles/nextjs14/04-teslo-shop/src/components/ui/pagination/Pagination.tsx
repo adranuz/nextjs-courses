@@ -42,7 +42,6 @@ export const Pagination = ({ totalPages }: Props) => {
 		return `${pathname}?${params.toString()}`;
 	};
 
-	console.log({ pathname, searchParams, currentPage });
 	return (
 		<div className="flex justify-center mt-1- mb-32">
 			<nav aria-label="Page navigation example">
