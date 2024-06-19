@@ -2,10 +2,7 @@
 import { logout } from "@/actions";
 import { useUIStore } from "@/store";
 import { clsx } from "clsx";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect } from "react";
-import dynamic from 'next/dynamic'
 import {
 	IoCloseOutline,
 	IoLogInOutline,
@@ -16,16 +13,31 @@ import {
 	IoShirtOutline,
 	IoTicketOutline,
 } from "react-icons/io5";
+import { useRouter } from 'next/navigation';
+import { useSession } from "next-auth/react";
 
 export const Sidebar = () => {
+	const router = useRouter();
 	const { closeSideMenu, isSideMenyOpen } = useUIStore();
 
-	const { data: session, status } = useSession();
+	const { data: session } = useSession();
 
+
+	const { push } = useRouter();
 	const logoutHandler = () => {
 		logout();
 		closeSideMenu();
 	};
+
+	const loginHandler = () => {
+		push("/auth/login");
+		closeSideMenu();
+	}
+
+	const handleUpdate = () => {
+		router.refresh();
+
+	}
 
 	return (
 		<div className="">
@@ -80,17 +92,17 @@ export const Sidebar = () => {
 					<span className="ml-3 text-xl">Ordenes</span>
 				</Link>
 
-				{status === "authenticated" && (
-					<Link
-						href="/auth/login"
-						className="flex items-center mt-10 p-2 bg-gray-50  hover:bg-gray-100 rounded transition-all"
+				{!session?.user && (
+					<button
+						onClick={loginHandler}
+						className="flex w-full items-center mt-10 p-2 bg-gray-50  hover:bg-gray-100 rounded transition-all"
 					>
 						<IoLogInOutline size={30} />
 						<span className="ml-3 text-xl">Login</span>
-					</Link>
+					</button>
 				)}
 
-				{status === "unauthenticated" && (
+				{!!session?.user && (
 					<button
 						onClick={logoutHandler}
 						className="flex w-full items-center mt-10 p-2 bg-gray-50  hover:bg-gray-100 rounded transition-all"
