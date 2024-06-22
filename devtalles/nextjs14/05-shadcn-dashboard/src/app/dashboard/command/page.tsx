@@ -39,7 +39,7 @@ export default function Page() {
 		// el evento precionarTecla ejecuta la funcion down
     document.addEventListener("keydown", down)
 
-		// se retorna una funcion que remueve el evento precionarTecla
+		// se limpia el listener del evento
     return () => document.removeEventListener("keydown", down)
 
   }, [])

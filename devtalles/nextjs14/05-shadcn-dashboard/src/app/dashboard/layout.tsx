@@ -28,8 +28,9 @@ const links = [
   { name: "skeleton", href: "skeleton" },
   { name: "slider", href: "slider" },
   { name: "sonner", href: "sonner" },
-  { name: "toast", href: "toast" },
   { name: "tabs", href: "tabs" },
+  { name: "table", href: "table" },
+  { name: "toast", href: "toast" },
   { name: "aspect-radio", href: "aspect-radio" },
   { name: "breadcrumb", href: "breadcrumb" },
   { name: "collapsible", href: "collapsible" },
@@ -43,7 +44,7 @@ export default function DashboardLayout({
 }) {
   return (
 		<>
-			<nav className="bg-white border-b border-gray-200 fixed z-30 w-full">
+			<nav className="dark:bg-slate-500 border-b border-gray-200 fixed z-30 w-full">
 				<div className="px-3 py-3 lg:px-5 lg:pl-3">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center justify-start">
@@ -130,15 +131,15 @@ export default function DashboardLayout({
 					</div>
 				</div>
 			</nav>
-			<div className="flex overflow-hidden bg-white pt-16">
+			<div className="dark:bg-slate-500 flex overflow-hidden pt-16 bg-dark">
 				<aside
 					id="sidebar"
 					className="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
 					aria-label="Sidebar"
 				>
-					<div className="relative flex-1 flex flex-col min-h-0 borderR border-gray-200 bg-white pt-0">
+					<div className="relative flex-1 flex flex-col min-h-0 borderR border-gray-200 pt-0">
 						<div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-							<div className="flex-1 px-3 bg-white divide-y space-y-1">
+							<div className="flex-1 px-3 bg-dark divide-y space-y-1">
 								<ul className="space-y-2 pb-2">
 									{links.map((link) => (
 										<li key={link.href}>
@@ -161,18 +162,18 @@ export default function DashboardLayout({
 				></div>
 				<div
 					id="main-content"
-					className="h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64"
+					className="h-full w-full bg-black-500 relative overflow-y-auto lg:ml-64"
 				>
 					<main>
 						<div className="pt-6 px-4">
 							<div className="w-full min-h-[calc(100vh-230px)]">
-								<div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
+								<div className="shadow rounded-lg p-4 sm:p-6 xl:p-8">
 									{children}
 								</div>
 							</div>
 						</div>
 					</main>
-					<footer className="bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
+					<footer className=" md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4">
 						<ul className="flex items-center flex-wrap mb-6 md:mb-0">
 							<li>
 								<a
