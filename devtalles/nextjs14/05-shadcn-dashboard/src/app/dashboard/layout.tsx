@@ -1,28 +1,32 @@
 // https://tailwindcomponents.com/component/tailwind-css-admin-dashboard-layout
 // https://gist.github.com/Klerith/3949f1c8b884d7101e378dfb668f0f3a
 
+import { ThemeProvider } from "@/components/theme-provider";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { ModeToggle } from "./theme/ThemeButton";
 
 const links = [
   { name: "accordion", href: "accordion" },
   { name: "alert", href: "alert" },
   { name: "alert dialog", href: "alert-dialog" },
+  { name: "aspect-radio", href: "aspect-radio" },
   { name: "avatar", href: "avatar" },
-  { name: "button", href: "button" },
-  { name: "breadcrumb", href: "breadcrumb" },
   { name: "badge", href: "badge" },
+  { name: "breadcrumb", href: "breadcrumb" },
+  { name: "button", href: "button" },
   { name: "calendar", href: "calendar" },
   { name: "card", href: "card" },
   { name: "carousel", href: "carousel" },
   { name: "checkbox", href: "checkbox" },
+  { name: "collapsible", href: "collapsible" },
   { name: "command", href: "command" },
   { name: "combobox", href: "combobox" },
-  { name: "collapsible", href: "collapsible" },
   { name: "context menu", href: "context-menu" },
   { name: "dialog", href: "dialog" },
-  { name: "menu bar", href: "menu-bar" },
+  { name: "form", href: "form" },
   { name: "input otp", href: "input-otp" },
+  { name: "menu bar", href: "menu-bar" },
   { name: "progress", href: "progress" },
   { name: "sheet", href: "sheet" },
   { name: "skeleton", href: "skeleton" },
@@ -30,10 +34,8 @@ const links = [
   { name: "sonner", href: "sonner" },
   { name: "tabs", href: "tabs" },
   { name: "table", href: "table" },
+  { name: "theme", href: "theme" },
   { name: "toast", href: "toast" },
-  { name: "aspect-radio", href: "aspect-radio" },
-  { name: "breadcrumb", href: "breadcrumb" },
-  { name: "collapsible", href: "collapsible" },
 
 ];
 
@@ -44,7 +46,12 @@ export default function DashboardLayout({
 }) {
   return (
 		<>
-			<nav className="dark:bg-slate-500 border-b border-gray-200 fixed z-30 w-full">
+		<ThemeProvider
+		attribute="class"
+		defaultTheme="system"
+		enableSystem
+		disableTransitionOnChange>
+			<nav className="dark:bg-slate-900 border-b border-gray-200 fixed z-30 w-full">
 				<div className="px-3 py-3 lg:px-5 lg:pl-3">
 					<div className="flex items-center justify-between">
 						<div className="flex items-center justify-start">
@@ -115,10 +122,12 @@ export default function DashboardLayout({
 										strokeWidth="16"
 									></line>
 								</svg>
-								<span className="self-center whitespace-nowrap ml-2">
+								<span className="self-center whitespace-nowrap ml-2 mr-2">
 									{" "}
 									Shadcn/ui
 								</span>
+<ModeToggle />
+
 							</a>
 						</div>
 						<div className="flex items-center">
@@ -131,7 +140,7 @@ export default function DashboardLayout({
 					</div>
 				</div>
 			</nav>
-			<div className="dark:bg-slate-500 flex overflow-hidden pt-16 bg-dark">
+			<div className="dark:bg-slate-900 flex overflow-hidden pt-16 bg-dark">
 				<aside
 					id="sidebar"
 					className="fixed hidden z-20 h-full top-0 left-0 pt-16 lg:flex flex-shrink-0 flex-col w-64 transition-width duration-75"
@@ -145,7 +154,7 @@ export default function DashboardLayout({
 										<li key={link.href}>
 											<Link
 												href={link.href}
-												className="text-base capitalize text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group"
+												className="dark:text-white text-base capitalize text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group dark:hover:bg-gray-800"
 											>
 												<span className="ml-3">{link.name}</span>
 											</Link>
@@ -294,6 +303,7 @@ export default function DashboardLayout({
 					</p>
 				</div>
 			</div>
-		</>
+			</ThemeProvider>
+			</>
 	);
 }

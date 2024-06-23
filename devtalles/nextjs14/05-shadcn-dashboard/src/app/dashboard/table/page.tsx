@@ -11,6 +11,5 @@ export default async function Page() {
 
 	return <div className="">
 		<DataTable columns={columns} data={data} />
-		
 	</div>;
 }
