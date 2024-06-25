@@ -1,43 +1,110 @@
 "use client";
-import { authenticate } from "@/actions";
+
 import clsx from "clsx";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
-import { useFormState, useFormStatus } from "react-dom";
+import { Button } from "@/components/ui/button";
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { IoArrowForwardOutline, IoInformationOutline } from "react-icons/io5";
+import { authenticate } from "@/actions";
+import { useFormState, useFormStatus } from "react-dom";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useToast } from "@/components/ui/use-toast";
+
+const formSchema = z.object({
+	email: z.string().email().min(2, {
+		message: "email must be at least 2 characters.",
+	}),
+	password: z.string().min(2, {
+		message: "Password must be at least 2 characters.",
+	}),
+});
 
 export const LoginForm = () => {
-	const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-
-	const router = useRouter();
-
-	useEffect(() => {
-		if (errorMessage === "Success") {
-			// redireccionar a la pagina de inicio
-			router.replace("/");
+	// 1. Define your form.
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+	});
+	// const [errorMessage, formAction] = useFormState(authenticate, undefined);
+	const [errorMessage, setErrorMessage] = useState("");
+	// 2. Define a submit handler.
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		// Do something with the form values.
+		// ✅ This will be type-safe and validated.
+		const formData: FormData = new FormData();
+		formData.append("email", values.email);
+		formData.append("password", values.password);
+		const response = await authenticate(undefined, formData);
+		console.log(response)
+		if (!response) {
+			return window.location.replace("/");
+		} else {
+			setErrorMessage(response);
 		}
-	}, [errorMessage]);
-	
-  
-  return (
-		<div className="">
-			<form action={dispatch} className="flex flex-col">
-				<label htmlFor="email">Correo electrónico</label>
-				<input
-					className="px-5 py-2 border bg-gray-200 rounded mb-5"
-					type="email"
+	}
+
+	const { toast } = useToast();
+	const runToast = (
+		message: string,
+		variant: "default" | "destructive" | null | undefined
+	) => {
+		toast({
+			variant,
+			title: "Uh oh! Something went wrong.",
+			description: message,
+			// action: <ToastAction altText="Try again">Try again</ToastAction>,
+		});
+	};
+
+	return (
+		<Form {...form}>
+			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+				{/* email */}
+				<FormField
+					control={form.control}
 					name="email"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Email</FormLabel>
+							<FormControl>
+								<Input placeholder="..." {...field} type="email" />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
 				/>
 
-				<label htmlFor="email">Contraseña</label>
-				<input
-					className="px-5 py-2 border bg-gray-200 rounded mb-5"
-					type="password"
+				{/* email */}
+				<FormField
+					control={form.control}
 					name="password"
+					render={({ field }) => (
+						<FormItem>
+							<FormLabel>Password</FormLabel>
+							<FormControl>
+								<Input placeholder="..." {...field} type="password" />
+							</FormControl>
+							<FormMessage />
+						</FormItem>
+					)}
 				/>
 
-				<LoginButton />
+				<LoginButton pending={form.formState.isLoading} />
 
 				<div
 					className="flex h-8 items-end space-x-1"
@@ -62,22 +129,21 @@ export const LoginForm = () => {
 			<Link href="/auth/new-account" className="btn-secondary text-center">
 				Crear una nueva cuenta
 			</Link>
-		</div>
+		</Form>
 	);
 };
 
-function LoginButton() {
-	const { pending } = useFormStatus();
-
+function LoginButton({ pending }: any) {
 	return (
-		<button
-			className={clsx("mt-4 w-full btn-primary flex", {
+		<Button
+			type="submit"
+			className={clsx("w-full", {
+				"btn-primary": !pending,
 				"btn-disabled": pending,
 			})}
-			aria-disabled={pending}
-			disabled={pending}
+			// disabled={pending}
 		>
 			Log in <IoArrowForwardOutline className="ml-auto h-5 w-5 text-gray-50" />
-		</button>
+		</Button>
 	);
 }

@@ -1,6 +1,13 @@
 'use server'
-import { signOut } from "@/auth.config"
+import { signOut } from "@/auth"
+// import { signOut as signOutUseSession } from "next-auth/react";
 
 export const logout = async () => {
-  await signOut()
+  'use server'
+  try {
+    await signOut();
+  } catch (error) {
+    return 'Credentials SignOut'
+  }
+  // await signOutUseSession()
 }

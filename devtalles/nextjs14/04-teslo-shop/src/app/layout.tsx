@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { inter } from "@/config/fonts";
 import { Provider } from "@/components";
+import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/toaster"
+
 
 export const metadata: Metadata = {
 	title: {
@@ -18,8 +21,13 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={cn(
+          "min-h-screen bg-background font-sans antialiased",
+          inter.variable
+        )}>
 				<Provider>{children}</Provider>
+				{/* /{children} */}
+				<Toaster />
 			</body>
 		</html>
 	);

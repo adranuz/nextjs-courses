@@ -17,5 +17,5 @@ interface Props {
 export default function Categories({ params, searchParams }: Props) {
 	const { categories } = params;
 	console.log(categories, searchParams)
-	return <h1>Categoría dinámica: {categories}</h1>;
+	return (<h1>Categoría dinámica: {categories}</h1>);
 }
